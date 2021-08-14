@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  parsing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./evo_id:/usr/src/app/evo_id
+      - ./logs:/usr/src/app/logs
+
+  flask:
+    build:
+      context: ./flask/
+      dockerfile: Dockerfile
+    volumes:
+      - ./evo_id:/usr/src/app/evo_id
+    ports:
+      - "5000:5000"
+
+
+  chrome:
+    image: selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210713
+    shm_size: 2gb
+    environment:
+      - noProxy=127.0.0.0/8
+    ports:
+      - "4444:4444"
+      - "7900:7900"
