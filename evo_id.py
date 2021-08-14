@@ -1,6 +1,9 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import requests
+from urllib.parse import urlparse
+
 from loguru import logger
 
 
@@ -24,6 +27,12 @@ PASS = "Aga007123"
 
     #document.getElementById("auth_id_email").value = "{LOGIN}";
     #document.getElementById("auth-form-password").value = "{PASS}";
+def get_current_url():
+    red_url = requests.get("http://melbet.bz/red/api.php").json()["work"]+"/L?tag=s_202589m_18637c_";
+    curr_url = requests.get(red_url).url
+    hostname = urlparse(curr_url).hostname
+    res_url = f"https://m.{hostname}/casino/?products=%5B46%5D"
+    return res_url
 def login(driver):
     try:
         driver.execute_script("""
@@ -39,10 +48,10 @@ def login(driver):
     except Exception as e:
         pass
 def mob_get_id(driver):
-    driver.get("https://m.melbet.com/casino/?products=%5B46%5D")
-    time.sleep(10)
+    driver.get(get_current_url())
+    time.sleep(15)
     login(driver)
-    time.sleep(10)
+    time.sleep(20)
     driver.execute_script("""
 document.getElementsByClassName("sl-casino__layer")[0].click();
 """)
