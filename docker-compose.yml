@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./evo_id:/usr/src/app/evo_id
+      - ./:/usr/src/app
       - ./logs:/usr/src/app/logs
 
   flask:
