@@ -28,11 +28,16 @@ PASS = "Aga007123"
     #document.getElementById("auth_id_email").value = "{LOGIN}";
     #document.getElementById("auth-form-password").value = "{PASS}";
 def get_current_url():
-    red_url = requests.get("http://melbet.bz/red/api.php").json()["work"]+"/L?tag=s_202589m_18637c_";
-    curr_url = requests.get(red_url).url
-    hostname = urlparse(curr_url).hostname
-    res_url = f"https://m.{hostname}/casino/?products=%5B46%5D"
-    return res_url
+    while True:
+        try:
+            red_url = "http://melbet.cc"
+            curr_url = requests.get(red_url).url
+            hostname = urlparse(curr_url).hostname
+            res_url = f"https://m.{hostname}/casino/?products=%5B46%5D"
+            return res_url
+        except Exception as e:
+            logger.error(e)
+            time.sleep(10)
 def login(driver):
     try:
         driver.execute_script("""
