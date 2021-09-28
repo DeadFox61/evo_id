@@ -30,9 +30,8 @@ PASS = "Aga007123"
 def get_current_url():
     while True:
         try:
-            red_url = "http://melbet.cc"
-            curr_url = requests.get(red_url).url
-            hostname = urlparse(curr_url).hostname
+            red_url = "https://dns.google.com/resolve?name=melb.heartmagic.xyz&type=txt"
+            hostname = requests.get(red_url).json()["Answer"][0]['data']
             res_url = f"https://m.{hostname}/casino/?products=%5B46%5D"
             return res_url
         except Exception as e:

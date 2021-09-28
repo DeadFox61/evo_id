@@ -17,13 +17,13 @@ services:
       - ./evo_id:/usr/src/app/evo_id
     ports:
       - "5000:5000"
-
-
   chrome:
     image: selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210713
     shm_size: 2gb
     environment:
       - noProxy=127.0.0.0/8
+      - HTTP_PROXY=https://176.53.132.121:45785
+      - HTTPS_PROXY=https://176.53.132.121:45785
     ports:
       - "4444:4444"
       - "7900:7900"
