@@ -1,6 +1,19 @@
 version: "3"
 
 services:
+#  parsing_dev:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    volumes:
+#      - ./:/usr/src/app
+#      - ./logs:/usr/src/app/logs
+#    entrypoint: tail -f /dev/null
+#    command: "tail -f /dev/null"
+#
+#    depends_on:
+#      - chrome
+
   parsing:
     build:
       context: .
@@ -8,6 +21,8 @@ services:
     volumes:
       - ./:/usr/src/app
       - ./logs:/usr/src/app/logs
+    depends_on:
+      - chrome
 
   flask:
     build:
@@ -20,10 +35,10 @@ services:
   chrome:
     image: selenium/standalone-chrome:4.0.0-rc-1-prerelease-20210713
     shm_size: 2gb
-    environment:
-      - noProxy=127.0.0.0/8
-      - HTTP_PROXY=https://176.53.132.121:45785
-      - HTTPS_PROXY=https://176.53.132.121:45785
+#    environment:
+#      - noProxy=127.0.0.0/8
+#      - HTTP_PROXY=https://176.53.132.121:45785
+#      - HTTPS_PROXY=https://176.53.132.121:45785
     ports:
       - "4444:4444"
       - "7900:7900"

@@ -39,16 +39,8 @@ def get_current_url():
             time.sleep(10)
 def login(driver):
     try:
-        driver.execute_script("""
-    document.getElementsByClassName("js-reg")[0].click()
-    """)
-        time.sleep(5)
-        driver.find_element_by_id("auth_id_email").send_keys(LOGIN)
-        driver.find_element_by_id("auth-form-password").send_keys(PASS)
-        driver.execute_script(f"""
-    document.getElementById("remember_user").checked = true;
-    document.getElementsByClassName("auth-button")[0].click()
-    """)
+        driver.add_cookie({"name": "SESSION", "value": "8e773074149282db434ad33d5b7c183d"})
+        driver.refresh()
     except Exception as e:
         pass
 def mob_get_id(driver):
@@ -57,15 +49,10 @@ def mob_get_id(driver):
     login(driver)
     time.sleep(20)
     driver.execute_script("""
-document.getElementsByClassName("sl-casino__layer")[0].click();
-""")
+    document.getElementsByClassName("slots-grid__game")[0].getElementsByClassName("casino-games__window")[0].click();
+    """)
     time.sleep(5)
-    try:
-        driver.execute_script("""
-        document.getElementsByClassName("swal2-confirm")[0].click();
-        """)
-    except Exception as e:
-        pass
+    driver.get("https://live.fantasysportnetwork.com/")
     time.sleep(5)
     for cookie in driver.get_cookies():
         if cookie["name"] == "EVOSESSIONID":
