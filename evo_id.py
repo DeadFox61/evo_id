@@ -39,7 +39,7 @@ def get_current_url():
             time.sleep(10)
 def login(driver):
     try:
-        driver.add_cookie({"name": "SESSION", "value": "8e773074149282db434ad33d5b7c183d"})
+        driver.add_cookie({"name": "SESSION", "value": "217c3086d4fb2e0d9a0ec863736ec0ed"})
         driver.refresh()
     except Exception as e:
         pass
